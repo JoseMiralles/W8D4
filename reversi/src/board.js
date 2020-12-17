@@ -130,25 +130,23 @@ Board.prototype.validMove = function (pos, color) {
  */
 Board.prototype.placePiece = function (pos, color) {
   if (this.validMove(pos, color)){
-    try{
-      const firsToFlip = [];
-      Board.DIRS.forEach((dir) => {
-        firsToFlip.push(this._positionsToFlip(pos, color, dir));
-      });
-      firsToFlip.forEach((positions) => {
-        positions.forEach((pos) => {
-          console.log(pos);
-          let piece = this.getPiece(pos);
-          piece.color = piece.oppColor(); 
-        })
-      });
-      this.grid[pos[0]][pos[1]] = new Piece(color);
-    } catch(Error){
-      throw new Error("Invalid move!");
-    }
+    const linesToFlip = [];
+    Board.DIRS.forEach((dir) => {
+      linesToFlip.push(this._positionsToFlip(pos, color, dir));
+      console.log(this._positionsToFlip(pos, color, dir));
+    });
+
+    linesToFlip.forEach((positions) => {
+      positions.forEach((pos) => {
+        let piece = this.getPiece(pos);
+        piece.color = piece.oppColor();
+      })
+    });
+    this.grid[pos[0]][pos[1]] = new Piece(color);
   } else {
     throw new Error("Invalid move!");
   }
+  // console.log(this.print());
 };
 
 /**
@@ -180,6 +178,14 @@ Board.prototype.isOver = function () {
  * Prints a string representation of the Board to the console.
  */
 Board.prototype.print = function () {
+  this.grid.forEach((row) => {
+    pr = "";
+    for (let i = 0; i < row.length; i++){
+      pr += row[i] === undefined ? "#" : row[i].toString();
+      pr += " ";
+    }
+    console.log(pr);
+  });
 };
 
 
