@@ -9,6 +9,16 @@ if (typeof window === 'undefined'){
  * and two white pieces at [3, 3] and [4, 4]
  */
 function _makeGrid () {
+  // let length = 8;
+  let newArray = new Array(8)
+  let grid = Array.from(newArray, () => {return new Array(8)});
+  //let grid = Array.from({length: 8}, () => {return new Array(8)});
+  // for(let i = 0; i< 8; i++)
+  grid[3][4] = new Piece('black');
+  grid[4][3] = new Piece('black');
+  grid[3][3] = new Piece('white');
+  grid[4][4] = new Piece('white');
+  return grid
 }
 
 /**
@@ -17,6 +27,7 @@ function _makeGrid () {
 function Board () {
   this.grid = _makeGrid();
 }
+
 
 Board.DIRS = [
   [ 0,  1], [ 1,  1], [ 1,  0],
@@ -28,6 +39,13 @@ Board.DIRS = [
  * Checks if a given position is on the Board.
  */
 Board.prototype.isValidPos = function (pos) {
+  if (pos[0] < 0 || pos[0] >8){
+    return false;
+  }
+  if (pos[1] < 0 || pos[1] >8){
+    return false;
+  }
+  return true
 };
 
 /**
@@ -35,6 +53,15 @@ Board.prototype.isValidPos = function (pos) {
  * throwing an Error if the position is invalid.
  */
 Board.prototype.getPiece = function (pos) {
+  // debugger
+  if (!this.isValidPos(pos)){throw new Error("Not valid pos!");}
+  
+  if (this.grid[pos[0]][pos[1]] === undefined){
+    return undefined;
+  } else{
+    return this.grid[pos[0]][pos[1]];
+  }
+  
 };
 
 /**
@@ -42,12 +69,15 @@ Board.prototype.getPiece = function (pos) {
  * matches a given color.
  */
 Board.prototype.isMine = function (pos, color) {
+  let piece = this.getPiece(pos);
+  if (piece !== undefined)  {return piece.color === color;}
 };
 
 /**
  * Checks if a given position has a piece on it.
  */
 Board.prototype.isOccupied = function (pos) {
+  return this.getPiece(pos) !== undefined
 };
 
 /**
@@ -64,6 +94,15 @@ Board.prototype.isOccupied = function (pos) {
  * Returns empty array if no pieces of the opposite color are found.
  */
 Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
+  if (( this.isValidPos(pos) === false) || 
+        (this.getPiece(pos) === undefined)){
+    return [];
+  }
+  let endPiece = this.getPiece(pos)
+  if (pos.includes(0) && endPiece.color === ){
+
+  }
+  
 };
 
 /**
