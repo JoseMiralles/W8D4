@@ -101,7 +101,7 @@ Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip = []){
   if (piece && piece.color != color) {
     piecesToFlip.push(pos);
     return this._positionsToFlip(pos, color, dir, piecesToFlip);
-  }
+  } else if (!piece) return [];
   return piecesToFlip;
 };
 
@@ -111,15 +111,13 @@ Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip = []){
  * color being flipped.
  */
 Board.prototype.validMove = function (pos, color) {
-
-  if (this.isValidPos(pos) && this.getPiece(pos) !== undefined){
-    this.DIRS.forEach((dir) => {
-      result.concat(this._positionsToFlip(pos, color, dir));
-      if (result === []) return true;
+  if (this.isValidPos(pos) && this.getPiece(pos) === undefined){
+    Board.DIRS.forEach((dir) => {
+      if (this._positionsToFlip(pos, color, dir).length !== 0)
+        return true;
     });
   }
   return false;
-  
 };
 
 /**
