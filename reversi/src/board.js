@@ -111,6 +111,15 @@ Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip = []){
  * color being flipped.
  */
 Board.prototype.validMove = function (pos, color) {
+
+  if (this.isValidPos(pos) && this.getPiece(pos) !== undefined){
+    this.DIRS.forEach((dir) => {
+      result.concat(this._positionsToFlip(pos, color, dir));
+      if (result === []) return true;
+    });
+  }
+  return false;
+  
 };
 
 /**
