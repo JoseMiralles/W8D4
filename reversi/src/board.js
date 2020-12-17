@@ -130,18 +130,22 @@ Board.prototype.validMove = function (pos, color) {
  */
 Board.prototype.placePiece = function (pos, color) {
   if (this.validMove(pos, color)){
-    debugger
-    const firsToFlip = [];
-    Board.DIRS.forEach((dir) => {
-      firsToFlip.push(this._positionsToFlip(pos, color, dir));
-    });
-    firsToFlip.forEach((positions) => {
-      positions
-      let piece = this.getPiece(positions);
-      piece.color = piece.oppColor(); 
-    });
-    this.grid[pos[0]][pos[1]] = new Piece(color);
-    debugger
+    try{
+      const firsToFlip = [];
+      Board.DIRS.forEach((dir) => {
+        firsToFlip.push(this._positionsToFlip(pos, color, dir));
+      });
+      firsToFlip.forEach((positions) => {
+        positions.forEach((pos) => {
+          console.log(pos);
+          let piece = this.getPiece(pos);
+          piece.color = piece.oppColor(); 
+        })
+      });
+      this.grid[pos[0]][pos[1]] = new Piece(color);
+    } catch(Error){
+      throw new Error("Invalid move!");
+    }
   } else {
     throw new Error("Invalid move!");
   }
