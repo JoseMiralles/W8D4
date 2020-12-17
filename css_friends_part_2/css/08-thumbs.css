@@ -1,2 +1,46 @@
 /* PHASE 2: Thumbs */
 
+.thumb{
+    display: block;
+    margin-top: 10px;
+  }
+  .thumbnails > a > li {
+    width: 28%;
+    float: left;
+    padding: 5px;
+  }
+  .thumbnails > a > li > img {
+      border: solid black 1px;
+      border-radius: 5px;
+  }
+  .thumbnails > a:hover:before, .thumbnails > a:hover:after  {
+    display: block;
+  }
+  .thumbnails > a::before {
+    content: attr(title);
+    display: none;
+    position: absolute;
+    bottom: 75px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background: #000;
+    color: white;
+    white-space: nowrap;
+  }
+  .thumbnails > a::before {
+    content: "";
+    display: none;
+    position: absolute;
+    bottom: 65px;
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #000;
+    border-bottom: 0 solid #000;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    background: transparent;
+  }

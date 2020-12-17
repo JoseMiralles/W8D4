@@ -1,1 +1,48 @@
 /* PHASE 0: Sidebar */
+
+.content-sidebar{
+    display: flexbox;
+    flex-direction: initial;
+}
+
+.profile-picture {
+    position: relative;
+    overflow: hidden;
+}
+
+.ribbon {
+    display: block;
+    background-color: #4fa000;
+    border: 1px solid darkgreen;
+    position: absolute;
+    width: 110px;
+    text-align: center;
+    color: white;
+    transform: rotate(-45deg) translateX(-29%);
+    z-index: 2;
+}
+
+.profile-info{
+    display: block;
+}
+.profile-info > header {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.profile-nav-ul > li:first-child {
+    display: block;
+    border-top: 1px solid grey;
+}
+.profile-nav-ul > li:nth-child(even) {
+    display: block;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+.profile-nav-ul > li {
+    padding: 5px;
+}
+.profile-nav-ul {
+    margin-top: 10px;
+}
